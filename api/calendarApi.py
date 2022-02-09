@@ -44,9 +44,12 @@ class CalendarApi():
         self.__eventId = val
 
     def get(self):
-        now = datetime.datetime.now(datetime.timezone.utc)
-        nextWeek = now + datetime.timedelta(days=6)
-        nextWeek = datetime.datetime(nextWeek.year, nextWeek.month, nextWeek.day, 23, 59, tzinfo=datetime.timezone.utc)
+        # タイムゾーンAsia/Tokyoの生成
+        JST = datetime.timezone(datetime.timedelta(hours=+9), 'JST')
+        
+        now = datetime.datetime.now(JST)
+        period = now + datetime.timedelta(days=7)
+        timeMax = datetime.datetime(period.year, period.month, period.day, 23, 59, tzinfo=JST)
 
         events_result = self.service.events().list(
             calendarId=self.calendarId, 
