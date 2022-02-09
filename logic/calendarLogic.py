@@ -22,7 +22,7 @@ class CalendarLogic():
         webhook = Webhook()
         webhookContent = WebhookContent()
 
-        message = self.config["webhook"].get('calendar_message')
+        message = self.config["webhook"].get('message').get('calendar_message')
         calendarUrl = self.config['calendar'].get('calendar_url')
         body = webhookContent.createMessage(message+calendarUrl)
         webhook.send(body)
@@ -39,10 +39,10 @@ class CalendarLogic():
             webhookContent = WebhookContent()
 
             if result == []:
-                message = self.config["webhook"].get('event_none_message')
+                message = self.config["webhook"].get('message').get('event_none_message')
                 body = webhookContent.createMessage(message)
             else:
-                message = self.config["webhook"].get('event_message')
+                message = self.config["webhook"].get('message').get('event_message')
                 body = webhookContent.createMessage(message)
                 
                 for event in result:
@@ -70,7 +70,7 @@ class CalendarLogic():
             webhook = Webhook()
             webhookData = WebhookData()
             webhookContent = WebhookContent()
-            message = self.config["webhook"].get('event_error_message')
+            message = self.config["webhook"].('message').get('event_error_message')
             body = webhookContent.createMessage(message)
 
             webhook.send(body)
@@ -114,7 +114,7 @@ class CalendarLogic():
             webhookData.date = calData.date
             webhookData.time = calData.time
             
-            message = self.config["webhook"].get('insert_message')
+            message = self.config["webhook"].('webhook').get('insert_message')
             body = webhookContent.createMessage(message)
             embeds = webhookContent.createEmbeds(webhookData)
             body["embeds"].append(embeds)
@@ -155,7 +155,7 @@ class CalendarLogic():
             webhookData = WebhookData()
             webhookContent = WebhookContent()
 
-            message = self.config["webhook"].get('insert_message')
+            message = self.config["webhook"].('message').get('insert_message')
             body = webhookContent.createMessage(message)
 
             webhookData.summary = calData.summary
@@ -172,7 +172,7 @@ class CalendarLogic():
             print(e)
             webhook = Webhook()
             webhookContent = WebhookContent()
-            message = self.config["webhook"].get('long_event_error_message')
+            message = self.config["webhook"].('message').get('long_event_error_message')
             body = webhookContent.createMessage(message)
 
             webhook.send(body)
@@ -185,14 +185,14 @@ class CalendarLogic():
             webhook = Webhook()
             webhookContent = WebhookContent()
 
-            message = self.config["webhook"].get('delete_message')
+            message = self.config["webhook"].('message').get('delete_message')
             body = webhookContent.createMessage(message)
             webhook.send(body)
         except Exception as e:
             print(e)
             webhook = Webhook()
             webhookContent = WebhookContent()
-            message = self.config["webhook"].get('delete_error_message')
+            message = self.config["webhook"].('message').get('delete_error_message')
             body = webhookContent.createMessage(message)
 
             webhook.send(body)
