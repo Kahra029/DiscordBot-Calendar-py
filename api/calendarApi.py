@@ -54,7 +54,7 @@ class CalendarApi():
         events_result = self.service.events().list(
             calendarId=self.calendarId, 
             timeMin=now.isoformat(),
-            timeMax=nextWeek.isoformat(),
+            timeMax=timeMax.isoformat(),
             maxResults=5,
             singleEvents=True,
             orderBy='startTime'
